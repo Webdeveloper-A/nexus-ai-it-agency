@@ -87,7 +87,7 @@ async function sendMessage() {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   try {
-    const res = await fetch('/api/chat', {
+    const res = await fetch('https://nexus-ai-it-agency.onrender.com/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages })
@@ -125,7 +125,7 @@ bookingForm.addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch('/api/booking', {
+    const res = await fetch('https://nexus-ai-it-agency.onrender.com/api/booking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
