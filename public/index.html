@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus AI — IT Agentligi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .hero-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Scroll Animatsiyalari */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .floating-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 380px;
+      height: 520px;
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    @media (max-width: 480px) {
+      .floating-chat {
+        width: 92%;
+        height: 65vh;
+        bottom: 15px;
+        right: 4%;
+      }
+    }
+
+    .smooth-scroll {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-white font-sans smooth-scroll overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3 text-2xl font-bold">
+        <span class="text-cyan-400">✦</span> Nexus AI
+      </div>
+      <div class="hidden md:flex gap-8 text-base font-medium">
+        <a href="#services" class="hover:text-cyan-400 transition">Xizmatlar</a>
+        <a href="#booking" class="hover:text-cyan-400 transition">Buyurtma</a>
+        <a href="#contact" class="hover:text-cyan-400 transition">Kontakt</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-3xl p-2">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden fixed top-20 left-0 right-0 glass z-40 py-10 text-center text-xl flex flex-col gap-8 md:hidden">
+    <a href="#services" class="hover:text-cyan-400 py-2">Xizmatlar</a>
+    <a href="#booking" class="hover:text-cyan-400 py-2">Buyurtma berish</a>
+    <a href="#contact" class="hover:text-cyan-400 py-2">Kontakt</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero-bg min-h-screen flex items-center pt-16 md:pt-20">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div class="fade-in">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">
+          Kelajakni <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400">bugun</span> yarating
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-lg">
+          Sun'iy intellekt bilan kuchaytirilgan IT xizmatlari. Tez, zamonaviy va natijali yechimlar.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="#booking" 
+             class="px-8 py-5 bg-white text-slate-950 rounded-3xl font-semibold text-lg hover:scale-105 transition shadow-2xl">
+            Buyurtma berish
+          </a>
+          <button onclick="toggleChat()" 
+                  class="px-8 py-5 border border-white/40 rounded-3xl font-semibold text-lg hover:bg-white/10 transition flex items-center gap-3">
+            <i class="fa-solid fa-robot"></i> 
+            AI bilan gaplashish
+          </button>
+        </div>
+      </div>
+
+      <div class="fade-in hidden md:block">
+        <div class="glass rounded-3xl p-10">
+          <ul class="space-y-6 text-lg">
+            <li class="flex items-center gap-4"><span class="text-3xl">🚀</span> 7 kun ichida tayyor veb-sayt</li>
+            <li class="flex items-center gap-4"><span class="text-3xl">📱</span> Professional mobil ilovalar</li>
+            <li class="flex items-center gap-4"><span class="text-3xl">🤖</span> AI integratsiyasi</li>
+            <li class="flex items-center gap-4"><span class="text-3xl">🔒</span> Yuqori darajadagi xavfsizlik</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="py-24 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-4xl md:text-5xl font-bold">Nima uchun biz?</h2>
+        <p class="text-slate-400 text-lg mt-4">Bizning jamoa tajribali mutaxassislar va eng yangi texnologiyalardan iborat</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-in">
+          <h3 class="text-3xl font-semibold mb-6">Zamonaviy yechimlar</h3>
+          <p class="text-slate-400 text-lg leading-relaxed">
+            Biz har bir loyihani individual yondashuv bilan amalga oshiramiz. Sun'iy intellekt, bulutli texnologiyalar va zamonaviy dasturlash tillaridan foydalanamiz.
+          </p>
+          <ul class="mt-8 space-y-4 text-slate-300">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 100% mijozlar qoniqishi</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> 24/7 qo'llab-quvvatlash</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-cyan-400"></i> Eng yangi texnologiyalar</li>
+          </ul>
+        </div>
+        <div class="fade-in">
+          <div class="glass rounded-3xl p-8">
+            <div class="grid grid-cols-2 gap-6 text-center">
+              <div>
+                <div class="text-4xl font-bold text-cyan-400">50+</div>
+                <div class="text-slate-400">Tugagan loyihalar</div>
+              </div>
+              <div>
+                <div class="text-4xl font-bold text-cyan-400">98%</div>
+                <div class="text-slate-400">Mijozlar qoniqishi</div>
+              </div>
+              <div>
+                <div class="text-4xl font-bold text-cyan-400">5+</div>
+                <div class="text-slate-400">Yil tajriba</div>
+              </div>
+              <div>
+                <div class="text-4xl font-bold text-cyan-400">24/7</div>
+                <div class="text-slate-400">Qo'llab-quvvatlash</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-24 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-4xl md:text-5xl font-bold">Bizning xizmatlar</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service cards will have fade-in -->
+        <div class="glass rounded-3xl p-8 fade-in hover:scale-105 transition-transform duration-300">
+          <i class="fa-solid fa-globe text-4xl text-cyan-400 mb-4"></i>
+          <h3 class="text-2xl font-semibold mb-4">Veb-sayt & Landing Page</h3>
+          <p class="text-slate-400">Zamonaviy dizayn, tez yuklanish va SEO optimallashtirish.</p>
+        </div>
+        <div class="glass rounded-3xl p-8 fade-in hover:scale-105 transition-transform duration-300">
+          <i class="fa-solid fa-mobile-screen-button text-4xl text-cyan-400 mb-4"></i>
+          <h3 class="text-2xl font-semibold mb-4">Mobil Ilovalar</h3>
+          <p class="text-slate-400">iOS va Android uchun yuqori sifatli mobil ilovalar.</p>
+        </div>
+        <div class="glass rounded-3xl p-8 fade-in hover:scale-105 transition-transform duration-300">
+          <i class="fa-solid fa-brain text-4xl text-cyan-400 mb-4"></i>
+          <h3 class="text-2xl font-semibold mb-4">AI Yechimlari</h3>
+          <p class="text-slate-400">Chatbot, tavsiya tizimlari va avtomatlashtirish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- BOOKING SECTION -->
+<section id="booking" class="py-24 bg-slate-950">
+  <div class="max-w-2xl mx-auto px-5 md:px-6">
+    <div class="text-center mb-12 fade-in">
+      <h2 class="text-4xl md:text-5xl font-bold mb-3">Loyihangizni boshlaylik</h2>
+      <p class="text-slate-400 text-lg">Konsultatsiya yoki to‘liq buyurtma berish uchun formani to‘ldiring</p>
+    </div>
+
+    <form id="booking-form" class="glass rounded-3xl p-10 md:p-12 space-y-8 fade-in">
+      <input type="text" id="name" placeholder="Ism va familiyangiz" required 
+             class="w-full bg-slate-800 border border-white/30 focus:border-cyan-400 rounded-2xl px-7 py-5 text-base md:text-lg outline-none transition">
+
+      <input type="email" id="email" placeholder="Email manzilingiz" required 
+             class="w-full bg-slate-800 border border-white/30 focus:border-cyan-400 rounded-2xl px-7 py-5 text-base md:text-lg outline-none transition">
+
+      <!-- Yaxshilangan Select -->
+      <div class="relative">
+        <select id="service" required 
+                class="w-full bg-slate-800 border border-white/30 focus:border-cyan-400 rounded-2xl px-7 py-5 text-base md:text-lg outline-none transition appearance-none">
+          <option value="" class="bg-slate-800 text-white">Xizmat turini tanlang</option>
+          <option value="Veb-sayt va Landing Page" class="bg-slate-800 text-white">Veb-sayt / Landing Page</option>
+          <option value="Mobil ilova" class="bg-slate-800 text-white">Mobil ilova (iOS & Android)</option>
+          <option value="AI integratsiyasi" class="bg-slate-800 text-white">AI integratsiyasi</option>
+          <option value="Bulutli xizmatlar" class="bg-slate-800 text-white">Bulutli infratuzilma</option>
+          <option value="Kibertahdid himoyasi" class="bg-slate-800 text-white">Kibertahdidlardan himoya</option>
+        </select>
+      </div>
+
+      <input type="datetime-local" id="date" required 
+             class="w-full bg-slate-800 border border-white/30 focus:border-cyan-400 rounded-2xl px-7 py-5 text-base md:text-lg outline-none transition">
+
+      <button type="submit" 
+              class="w-full py-6 bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 text-slate-950 font-bold text-xl rounded-3xl transition-all duration-300 shadow-xl">
+        Buyurtmani yuborish
+      </button>
+    </form>
+
+    <div id="success-message" class="hidden mt-8 text-center text-green-400 font-semibold text-xl md:text-2xl bg-green-900/30 py-6 rounded-3xl"></div>
+  </div>
+</section>
+
+  <!-- Floating AI Chat -->
+  <div id="floating-chat" class="floating-chat hidden">
+    <div class="glass rounded-3xl h-full flex flex-col overflow-hidden shadow-2xl">
+      <div class="bg-gradient-to-r from-cyan-500 to-purple-500 px-6 py-4 flex items-center justify-between rounded-t-3xl">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-robot text-3xl"></i>
+          <div>
+            <p class="font-semibold">AI Maslahatchi</p>
+            <p class="text-xs text-white/70">Doim online</p>
+          </div>
+        </div>
+        <button onclick="toggleChat()" class="text-3xl leading-none text-white/80 hover:text-white">×</button>
+      </div>
+      
+      <div id="chat-window" class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 bg-slate-950/60"></div>
+      
+      <div class="p-5 border-t border-white/10">
+        <div class="flex gap-3">
+          <input id="chat-input" type="text" placeholder="Savolingizni yozing..." 
+                 class="flex-1 bg-white/10 border border-white/20 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400 text-base">
+          <button id="send-btn" class="px-6 bg-cyan-400 hover:bg-cyan-300 text-slate-900 rounded-2xl transition">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Toggle Button -->
+  <button onclick="toggleChat()" 
+          class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-16 h-16 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition text-3xl z-50">
+    <i class="fa-solid fa-robot"></i>
+  </button>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-24 bg-black">
+  <div class="max-w-7xl mx-auto px-5 md:px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Biz bilan bog‘laning</h2>
+      <p class="text-slate-400 text-lg">Tez va qulay aloqa uchun quyidagi ma’lumotlardan foydalaning</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      
+      <!-- Email -->
+      <div class="glass rounded-3xl p-8 text-center hover:scale-105 transition duration-300">
+        <div class="w-16 h-16 mx-auto mb-6 bg-cyan-500/10 rounded-2xl flex items-center justify-center">
+          <i class="fa-solid fa-envelope text-4xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Email</h3>
+        <a href="mailto:arabbo yabdur asulov65@gmail.com" 
+           class="text-slate-300 hover:text-cyan-400 break-all text-base md:text-lg transition">
+          arabboyabdurasulov65@gmail.com
+        </a>
+      </div>
+
+      <!-- Telefon -->
+      <div class="glass rounded-3xl p-8 text-center hover:scale-105 transition duration-300">
+        <div class="w-16 h-16 mx-auto mb-6 bg-cyan-500/10 rounded-2xl flex items-center justify-center">
+          <i class="fa-solid fa-phone text-4xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Telefon</h3>
+        <a href="tel:+998770836905" 
+           class="text-slate-300 hover:text-cyan-400 text-xl font-medium transition">
+          +998 77 083 69 05
+        </a>
+      </div>
+
+      <!-- Manzil -->
+      <div class="glass rounded-3xl p-8 text-center hover:scale-105 transition duration-300">
+        <div class="w-16 h-16 mx-auto mb-6 bg-cyan-500/10 rounded-2xl flex items-center justify-center">
+          <i class="fa-solid fa-location-dot text-4xl text-cyan-400"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Manzil</h3>
+        <p class="text-slate-300 text-base md:text-lg">
+          Toshkent, O‘zbekiston
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <footer class="bg-black py-12 text-center text-slate-500">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      <div class="flex justify-center gap-8 mb-6">
+        <a href="https://t.me/Arabboy_athlete" target="_blank" class="text-2xl hover:text-cyan-400 transition"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://instagram.com/arabboy_athlete" target="_blank" class="text-2xl hover:text-cyan-400 transition"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://github.com/Webdeveloper-A" target="_blank" class="text-2xl hover:text-cyan-400 transition"><i class="fa-brands fa-github"></i></a>
+      </div>
+      <p>© 2026 Nexus AI IT Agency • Barcha huquqlar himoyalangan</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
